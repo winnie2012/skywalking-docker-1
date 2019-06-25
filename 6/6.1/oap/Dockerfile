@@ -16,6 +16,12 @@
 
 FROM apache/skywalking-base:6.1.0
 
+
+# 同步时区和时间
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
+    apk del tzdata
+    
 LABEL maintainer="hanahmily@apache.org"
 
 ENV JAVA_OPTS=" -Xms256M " \
